@@ -1,0 +1,21 @@
+#!/bin/bash
+
+tag_prefix="$DOCKER_REPO:"
+if [ "$DOCKER_TAG" != "latest" ]; then
+  tag_prefix="${tag_prefix}${DOCKER_TAG}-"
+fi
+
+build_and_push () {
+  tag=${tag_prefix}${1}
+
+  docker build . \
+    --build-arg=JEKYLL_VERSION \
+    --file=$DOCKERFILE_PATH \
+    --target=$1 \
+    --tag=$tag
+
+  docker push $tag
+}
+
+build_and_push minimal
+build_and_push build
