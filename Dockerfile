@@ -19,6 +19,7 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US
 
 RUN mkdir -m777 -p $JEKYLL_DATA_DIR/.jekyll-cache $JEKYLL_VAR_DIR
+WORKDIR $JEKYLL_DATA_DIR
 
 CMD ["--help"]
 ENTRYPOINT ["jekyll"]
